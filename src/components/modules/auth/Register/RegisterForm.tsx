@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { resisterUser } from "@/services/AuthService";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { registrationSchema } from "./registerValidation";
@@ -62,6 +63,7 @@ const RegisterForm = () => {
                 <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input
+                    type="text"
                     placeholder="name"
                     {...field}
                     value={field.value || ""}
@@ -79,6 +81,7 @@ const RegisterForm = () => {
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input
+                    type="email"
                     placeholder="email"
                     {...field}
                     value={field.value || ""}
@@ -96,6 +99,7 @@ const RegisterForm = () => {
                 <FormLabel>Password</FormLabel>
                 <FormControl>
                   <Input
+                    type="password"
                     placeholder="password"
                     {...field}
                     value={field.value || ""}
@@ -113,6 +117,7 @@ const RegisterForm = () => {
                 <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
                   <Input
+                    type="password"
                     placeholder="Confirm Password"
                     {...field}
                     value={field.value || ""}
@@ -135,6 +140,12 @@ const RegisterForm = () => {
           </Button>
         </form>
       </Form>
+      <p className="text-sm text-gray-600 text-center my-3">
+        Already have an account ?
+        <Link href="/login" className="text-primary">
+          Login
+        </Link>
+      </p>
     </div>
   );
 };
