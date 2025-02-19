@@ -3,6 +3,7 @@
 import Logo from "@/app/assets/svgs/Logo";
 import { Button } from "@/components/ui/button";
 import NMImageUploader from "@/components/ui/core/NMImageUploader";
+import ImagePreviewer from "@/components/ui/core/NMImageUploader/ImagePreviewer";
 
 import {
   Form,
@@ -200,11 +201,17 @@ const CreateShopForm = () => {
               />
             </div>
             <div className="mt-8">
+              <ImagePreviewer
+                setImageFiles={setImageFiles}
+                imagePreview={imagePreview}
+                setImagePreview={setImagePreview}
+              />
+
               <NMImageUploader
-                imageFiles={imageFiles}
                 setImageFiles={setImageFiles}
                 setImagePreview={setImagePreview}
-                imagePreview={imagePreview}
+                label="Upload Logo"
+                className="mt-1"
               />
             </div>
           </div>
