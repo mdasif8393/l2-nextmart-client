@@ -14,8 +14,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+
 const CreateShopForm = () => {
+  const [imageFiles, setImageFiles] = useState<File[] | []>([]);
+  const [imagePreview, setImagePreview] = useState<string[] | []>([]);
+
   const form = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -195,7 +200,12 @@ const CreateShopForm = () => {
               />
             </div>
             <div className="mt-8">
-              <NMImageUploader />
+              <NMImageUploader
+                imageFiles={imageFiles}
+                setImageFiles={setImageFiles}
+                setImagePreview={setImagePreview}
+                imagePreview={imagePreview}
+              />
             </div>
           </div>
 

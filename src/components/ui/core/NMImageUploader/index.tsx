@@ -1,15 +1,35 @@
-import { useState } from "react";
+import Image from "next/image";
+import { Dispatch, SetStateAction } from "react";
 import { Input } from "../../input";
 
-const NMImageUploader = () => {
-  const [imageFiles, setImageFiles] = useState<File[] | []>([]);
+type TImageUploaderProps = {
+  imageFiles: File[] | [];
+  setImageFiles: Dispatch<SetStateAction<[] | File[]>>;
+  imagePreview: string[] | [];
+  setImagePreview: Dispatch<SetStateAction<[] | string[]>>;
+};
 
+const NMImageUploader = ({
+  setImageFiles,
+  imageFiles,
+  imagePreview,
+  setImagePreview,
+}: TImageUploaderProps) => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files![0];
     setImageFiles((prev) => [...prev, file]);
-  };
 
-  console.log(imageFiles);
+    if (file) {
+      // convert file to url after upload
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview((prev) => [...prev, reader.result as string]);
+      };
+      reader.readAsDataURL(file);
+    }
+    event.target.value = "";
+  };
+  console.log({ imagePreview });
 
   return (
     <div>
@@ -27,6 +47,11 @@ const NMImageUploader = () => {
       >
         Upload Logo
       </label>
+      <div>
+        {imagePreview.map((preview, idx) => (
+          <Image src={preview} key={idx} alt="" width={500} height={500} />
+        ))}
+      </div>
     </div>
   );
 };
