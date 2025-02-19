@@ -48,8 +48,9 @@ export const loginUser = async (userData: FieldValues) => {
   }
 };
 
+// get access token
 export const getCurrentUser = async () => {
-  const accessToken = (await cookies()).get("accessToken")!.value;
+  const accessToken = (await cookies()).get("accessToken")?.value;
   let decodedData = null;
   if (accessToken) {
     decodedData = await jwtDecode(accessToken);
@@ -71,7 +72,6 @@ export const reCaptchaTokenVerification = async (token: string) => {
         response: token,
       }),
     });
-    console.log(res);
     return res.json();
   } catch (err: any) {
     return Error(err);
