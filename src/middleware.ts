@@ -41,6 +41,7 @@ export const middleware = async (request: NextRequest) => {
       return NextResponse.next();
     }
   }
+  // redirect to home page
   return NextResponse.redirect(new URL("/", request.url));
 };
 
