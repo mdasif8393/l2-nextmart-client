@@ -71,7 +71,9 @@ export default function Navbar() {
                   <DropdownMenuItem>Profile</DropdownMenuItem>
                   <DropdownMenuItem>My Account</DropdownMenuItem>
                   <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/user/dashboard">Dashboard</Link>
+                  </DropdownMenuItem>
                   <DropdownMenuItem>My Shop</DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem className="bg-red-500 hover:cursor-pointer">
