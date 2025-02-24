@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 export const createBrand = async (data: FormData) => {
@@ -11,6 +12,7 @@ export const createBrand = async (data: FormData) => {
       },
       body: data,
     });
+    revalidateTag("BRANDS");
     return res.json();
   } catch (error: any) {
     return Error(error);
@@ -25,6 +27,7 @@ export const deleteBrand = async (id: string) => {
         Authorization: (await cookies()).get("accessToken")!.value,
       },
     });
+    revalidateTag("BRANDS");
     return res.json();
   } catch (error: any) {
     return Error(error);
@@ -33,7 +36,11 @@ export const deleteBrand = async (id: string) => {
 
 export const getAllBrands = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/brand`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/brand`, {
+      next: {
+        tags: ["BRANDS"],
+      },
+    });
     return res.json();
   } catch (error: any) {
     return Error(error);
