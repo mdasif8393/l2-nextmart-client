@@ -25,7 +25,7 @@ export default function Navbar() {
   const handleLogOut = () => {
     logout();
     setIsLoading(true);
-    // if current route math with protected routes then go to login page
+    // if current route match with protected routes then go to login page
     if (protectedRoutes.some((route) => pathname.match(route))) {
       router.push("/");
     }

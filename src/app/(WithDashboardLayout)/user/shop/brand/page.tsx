@@ -1,9 +1,12 @@
 import ManageBrands from "@/components/modules/shop/brand";
+import { getAllBrands } from "@/services/Brand";
 
-const ManageBrandPage = () => {
+const ManageBrandPage = async () => {
+  const { data, meta } = await getAllBrands();
+  console.log(data);
   return (
     <div>
-      <ManageBrands />
+      <ManageBrands brands={data} />
     </div>
   );
 };

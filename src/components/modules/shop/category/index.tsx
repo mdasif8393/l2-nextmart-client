@@ -1,9 +1,11 @@
 "use client";
 import { NMTable } from "@/components/ui/core/NMTable";
+import { deleteCategory } from "@/services/Category";
 import { ICategory } from "@/types/category";
 import { ColumnDef } from "@tanstack/react-table";
 import { Trash } from "lucide-react";
 import Image from "next/image";
+import { toast } from "sonner";
 import CreateCategoryModal from "./CreateCategoryModal";
 
 type TCategoriesProps = {
@@ -11,6 +13,17 @@ type TCategoriesProps = {
 };
 
 const ManageCategories = ({ categories }: TCategoriesProps) => {
+  const handleDelete = async (category: ICategory) => {
+    try {
+      const res = await deleteCategory(category?._id);
+      if (res.success) {
+        toast.success(res.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const columns: ColumnDef<ICategory>[] = [
     {
       accessorKey: "name",
@@ -52,7 +65,7 @@ const ManageCategories = ({ categories }: TCategoriesProps) => {
         <button
           className="text-red-500"
           title="Delete"
-          // onClick={() => handleDelete(row.original)}
+          onClick={() => handleDelete(row.original)}
         >
           <Trash className="w-5 h-5" />
         </button>
